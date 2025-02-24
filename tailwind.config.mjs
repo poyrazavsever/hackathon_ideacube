@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#493D9E",
+        secondary: "#B2A5FF",
+      },
     },
   },
   plugins: [],
