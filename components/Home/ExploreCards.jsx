@@ -8,7 +8,6 @@ const ExploreCards = () => {
       description:
         "Yüksek potansiyele sahip girişimleri erken aşamada keşfedin ve büyüme yolculuklarında destek olun. GrowTogether, inovatif projeleri size sunarak doğru girişime yatırım yapma fırsatı sağlar.",
       buttonText: "Fırsatları Keşfet",
-      icon: <BiDollarCircle className="text-4xl text-primary" />,
       bgColor: "bg-white",
       textColor: "text-gray-900",
       buttonColor: "bg-primary text-white hover:bg-opacity-80",
@@ -18,7 +17,6 @@ const ExploreCards = () => {
       description:
         "Yetilerinizi en iyi şekilde kullanabileceğiniz projeler mi arıyorsunuz? GrowTogether, yazılımcılardan tasarımcılara, pazarlama uzmanlarından iş geliştiricilere kadar herkes için fırsatlar sunar.",
       buttonText: "Projeleri Keşfet",
-      icon: <BiBriefcase className="text-4xl text-secondary" />,
       bgColor: "bg-primary text-white",
       textColor: "text-white",
       buttonColor: "bg-white text-primary hover:bg-opacity-90",
@@ -28,7 +26,6 @@ const ExploreCards = () => {
       description:
         "Harika bir fikriniz var ama hayata geçirmek için ekibe veya yatırıma mı ihtiyacınız var? GrowTogether, uzmanları ve yatırımcıları bir araya getirerek fikrinizi gerçek bir girişime dönüştürmenize yardımcı olur.",
       buttonText: "Fikirleri Keşfet",
-      icon: <BiBulb className="text-4xl text-primary" />,
       bgColor: "bg-white",
       textColor: "text-gray-900",
       buttonColor: "bg-primary text-white hover:bg-opacity-80",
@@ -42,10 +39,7 @@ const ExploreCards = () => {
           key={index}
           className={`relative p-8 rounded-2xl shadow-neutral-300 shadow-lg transition-all duration-300 hover:shadow-2xl w-full max-w-sm md:max-w-md ${card.bgColor}`}
         >
-          {/* Icon */}
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-opacity-20 rounded-full flex items-center justify-center">
-            {card.icon}
-          </div>
+
 
           {/* İçerik */}
           <h3 className={`text-lg font-semibold mb-3 ${card.textColor}`}>
