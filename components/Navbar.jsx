@@ -44,6 +44,7 @@ const Navbar = () => {
             <Link href="/investors" className="text-black hover:text-neutral-600 transition-all">Yatırımcılar</Link>
             <Link href="/team-members" className="text-black hover:text-neutral-600 transition-all">Ekip Arkadaşları</Link>
             <Link href="/toplist" className="text-black hover:text-neutral-600 transition-all">Liderlik Tablosu</Link>
+            <Link href="/ai" className="text-black hover:text-neutral-600 transition-all">Yapay Değerlendirme</Link>
 
             {/* Profil Fotoğrafı ve Dropdown */}
             <div className="relative">

@@ -27,23 +27,29 @@ const Featured = ({ profiles }) => {
 // Örnek veri
 const mockProfiles = [
   {
-    name: "Talha Tarlabaz",
+    name: "Gökhan Topal",
     sector: "Pazar Araştırması",
     rating: 4.9,
-    image: "/images/talha.jpg",
+    image: "https://media.licdn.com/dms/image/v2/D4D03AQGTHq1QI2M9GA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1703926062688?e=1746057600&v=beta&t=9LsZyrf1HxRqgj3TFcjqbwbE9Rpa2kP6Rr3E2Weud_Q",
   },
   {
-    name: "Poyraz Avsever",
+    name: "Hasibe Aysan",
     sector: "Yazılım Geliştirme",
     rating: 4.8,
-    image: "/images/poyraz.jpg",
+    image: "https://media.licdn.com/dms/image/v2/D4D03AQE7edQe-Olkow/profile-displayphoto-shrink_200_200/B4DZQyLhn9HMAY-/0/1736008670887?e=1746057600&v=beta&t=5MsPX-gGhoiQD7tZI0_X9HOpOSsS9YMMEJDosq9FBQE",
 
   },
   {
-    name: "Halitcan Emir",
+    name: "Zeynep Baysal",
     sector: "Dijital Pazarlama",
     rating: 4.7,
-    image: "/images/halit.jpg",
+    image: "https://media.licdn.com/dms/image/v2/D4E03AQG9AlIc8RwLJg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1701677026124?e=1746057600&v=beta&t=4g5NS26jqvWBE9q1kM-lxg3knOM2gax7WZ6RMvdeCyQ",
+  },
+  {
+    name: "Abdullah Çörtü",
+    sector: "Dijital Pazarlama",
+    rating: 4.7,
+    image: "/images/abdullah.jpg",
   },
 ];
 

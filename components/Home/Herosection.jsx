@@ -29,8 +29,13 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Hero Pattern (Altta) */}
-      <div className="w-screen h-48 bg-[url('/svg/pattern.svg')]"></div>
+      {/* Logolar */}
+      <div className="mt-16 flex justify-center gap-8">
+        <img src="/logos/1.jpeg" alt="Logo 1" className="h-12" />
+        <img src="/logos/2.jpeg" alt="Logo 2" className="h-12" />
+        <img src="/logos/3.jpeg" alt="Logo 3" className="h-12" />
+        <img src="/logos/4.jpeg" alt="Logo 4" className="h-12" />
+      </div>
 
     </section>
   );
