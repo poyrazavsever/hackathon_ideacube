@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { auth } from "../src/firebase"; // Firebase yapılandırma dosyanızı içe aktarın
+import { auth } from "../src/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { motion } from "framer-motion"; // Framer Motion import
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Dropdown açma kontrolü
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -12,6 +14,10 @@ const Navbar = () => {
     });
     return () => unsubscribe();
   }, []);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
     <nav className="flex justify-between items-center px-8 py-4">
@@ -38,6 +44,49 @@ const Navbar = () => {
             <Link href="/investors" className="text-black hover:text-neutral-600 transition-all">Yatırımcılar</Link>
             <Link href="/team-members" className="text-black hover:text-neutral-600 transition-all">Ekip Arkadaşları</Link>
             <Link href="/toplist" className="text-black hover:text-neutral-600 transition-all">Liderlik Tablosu</Link>
+
+            {/* Profil Fotoğrafı ve Dropdown */}
+            <div className="relative">
+              <div 
+                className="w-10 h-10 rounded-full bg-gray-300 cursor-pointer flex items-center justify-center" 
+                onClick={toggleDropdown}
+              >
+                {/* Profil Fotoğrafı */}
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="w-full h-full rounded-full object-cover flex items-center justify-center" />
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="w-full h-full text-white flex items-center justify-center">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4z"/>
+                  </svg>
+                )}
+              </div>
+              
+              {dropdownOpen && (
+                <motion.div
+                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ul className="py-2">
+                    <li>
+                      <Link href="/profile" className="block px-4 py-2 text-black hover:bg-gray-100">Profil</Link>
+                    </li>
+                    <li>
+                      <Link href="/share-education" className="block px-4 py-2 text-black hover:bg-gray-100">Eğitim Paylaş</Link>
+                    </li>
+                    <li>
+                      <Link href="/applications" className="block px-4 py-2 text-black hover:bg-gray-100">Başvurular</Link>
+                    </li>
+                    <li>
+                      <Link href="/settings" className="block px-4 py-2 text-black hover:bg-gray-100">Ayarlar</Link>
+                    </li>
+                  </ul>
+                </motion.div>
+              )}
+            </div>
+
             <button 
               onClick={() => signOut(auth)} 
               className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-all">
