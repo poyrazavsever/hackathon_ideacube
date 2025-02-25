@@ -52,7 +52,7 @@ const Investors = () => {
         id: 5, 
         name: "Burak Şahin", 
         profilePic: "images/poyraz.jpg", 
-        isFeatured: true, 
+        isFeatured: false, 
         popularity: 88,
         bio: "Yatırım ve teknoloji dünyasında lider.",
         country: "Türkiye",
@@ -74,11 +74,14 @@ const Investors = () => {
     setLoading(false);
   }, []);
 
+  // isFeatured = true olan yatırımcıları filtreliyoruz
   const featuredInvestors = investors.filter(inv => inv.isFeatured);
+  // Yatırımcıları popülerliğe göre sıralıyoruz
   const popularInvestors = [...investors].sort((a, b) => b.popularity - a.popularity);
 
   return (
     <div className="container mx-auto p-6 py-12 md:py-24">
+      {/* Öne Çıkan Yatırımcılar Başlığı ve Kartları */}
       <h1 className="text-2xl font-bold mb-12">Öne Çıkan Yatırımcılar</h1>
       <motion.div 
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
@@ -95,6 +98,7 @@ const Investors = () => {
         ))}
       </motion.div>
 
+      {/* Popüler Yatırımcılar Başlığı ve Kartları */}
       <h1 className="text-2xl font-bold my-12">Popüler Yatırımcılar</h1>
       <motion.div 
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
@@ -102,7 +106,7 @@ const Investors = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {popularInvestors.map((investor) => (
+        {popularInvestors.filter(inv => !inv.isFeatured).map((investor) => (
           <InvestorCard 
             key={investor.id} 
             {...investor} 
