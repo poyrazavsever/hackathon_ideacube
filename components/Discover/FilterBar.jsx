@@ -30,7 +30,7 @@ const FilterBar = () => {
 
   return (
     <div className="w-full flex items-end justify-between container mx-auto">
-      <h1 className="text-2xl font-bold h-full">Keşfet!</h1>
+      <h1 className="text-2xl font-bold h-full pl-4">Keşfet!</h1>
       <div className="relative bg-purple-600 p-4 rounded-xl shadow-lg w-72 mt-16 h-full">
         <motion.div 
           className="flex justify-between items-center cursor-pointer text-white"
