@@ -33,14 +33,12 @@ const ExploreCards = () => {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12 md:py-24">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-center py-12 md:py-24 px-4">
       {cards.map((card, index) => (
         <div
           key={index}
           className={`relative p-8 rounded-2xl shadow-neutral-300 shadow-lg transition-all duration-300 hover:shadow-2xl w-full max-w-sm md:max-w-md ${card.bgColor}`}
         >
-
-
           {/* İçerik */}
           <h3 className={`text-lg font-semibold mb-3 ${card.textColor}`}>
             {card.title}

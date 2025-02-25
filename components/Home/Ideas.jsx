@@ -42,17 +42,17 @@ const Ideas = () => {
   ];
 
   return (
-    <div className="py-12 md:py-24">
+    <div className="py-12 md:py-24 px-4">
       <h2 className="text-2xl font-bold text-center mb-6">
         En Popüler <span className="text-primary">Fikirler</span>
       </h2>
-      <div className="flex flex-wrap gap-6 justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {ideas.map((idea, index) => (
           <IdeaCard key={index} title={idea.title} description={idea.description} needs={idea.needs}/>
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <button className="bg-primary text-white px-6 py-3 rounded-lg shadow-md hover:bg-opacity-80">
+        <button className="bg-primary text-white px-6 py-3 rounded-lg shadow-md hover:bg-opacity-80 transition">
           Fikirleri Keşfet
         </button>
       </div>

@@ -12,7 +12,7 @@ const categories = [
 
 const Populers = () => {
   return (
-    <div className="flex flex-col items-center text-center py-12 md:py-24">
+    <div className="flex flex-col items-center text-center py-12 md:py-24 px-4">
       {/* Başlık ve Açıklama */}
       <div className="max-w-2xl flex flex-col gap-4">
         <h2 className="text-3xl font-bold">
@@ -26,13 +26,13 @@ const Populers = () => {
       </div>
 
       {/* Kategori Butonları */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 w-full max-w-4xl">
         {categories.map((category, index) => (
           <button
             key={index}
-            className={`flex items-center justify-center gap-2 px-6 py-3 rounded-full border text-lg font-medium
+            className={`flex items-center justify-center gap-2 px-6 py-3 rounded-full border text-lg font-medium w-full
               ${category.active ? "bg-purple-100 text-black" : "border-gray-300 text-gray-700"} 
-              hover:bg-purple-200 transition-all`}
+              hover:bg-purple-200 transition-all duration-300 shadow-md hover:shadow-lg`}
           >
             {category.icon} {category.name}
           </button>
