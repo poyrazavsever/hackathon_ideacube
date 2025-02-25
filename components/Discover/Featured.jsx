@@ -2,7 +2,7 @@ import React from "react";
 
 const Featured = ({ profiles }) => {
   return (
-    <div className="p-6 rounded-xl container mx-auto">
+    <div className="p-6 rounded-xl container mx-auto py-12 md:py-24">
       <h2 className="text-2xl font-semibold text-gray-800 mb-8">En Çok Oylanan Profiller</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {profiles.map((profile, index) => (
