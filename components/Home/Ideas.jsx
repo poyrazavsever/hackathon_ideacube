@@ -48,7 +48,7 @@ const Ideas = () => {
       </h2>
       <div className="flex flex-wrap gap-6 justify-center">
         {ideas.map((idea, index) => (
-          <IdeaCard key={index} {...idea} />
+          <IdeaCard key={index} title={idea.title} description={idea.description} needs={idea.needs}/>
         ))}
       </div>
       <div className="flex justify-center mt-8">

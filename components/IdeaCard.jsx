@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheckSquare } from "react-icons/fa";
 
-const IdeaCard = ({ title, description, needs }) => {
+const IdeaCard = ({ title, description, needs = [] }) => {
   return (
     <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md hover:shadow-2xl transition-all cursor-pointer">
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
