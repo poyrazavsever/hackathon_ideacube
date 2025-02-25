@@ -14,7 +14,7 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="flex items-center space-x-6">
-        <Link href="/explore" className="text-black hover:text-neutral-600 transition-all">Keşfet</Link>
+        <Link href="/discover" className="text-black hover:text-neutral-600 transition-all">Keşfet</Link>
         <Link href="/login" className="text-black hover:text-neutral-600 transition-all">Giriş Yap</Link>
         <Link href="/register" className="bg-primary text-white px-4 py-2 rounded-md hover:bg-opacity-70 transition-all">
           Kayıt Ol
