@@ -11,6 +11,10 @@ const Register = () => {
     setStep(2);
   };
 
+  const handleBackToStep1 = () => {
+    setStep(1);
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <motion.div
@@ -54,6 +58,12 @@ const Register = () => {
 
         {step === 2 && (
           <div>
+            <button
+              onClick={handleBackToStep1}
+              className="text-purple-600 mb-4 flex items-center gap-2"
+            >
+              ← Geri Dön
+            </button>
             <h2 className="text-2xl font-semibold text-gray-900 text-center">
               {userType} Kaydı
             </h2>
