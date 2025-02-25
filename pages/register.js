@@ -1,10 +1,28 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router"; // next/router'dan useRouter'ı import ettik
 import { FaUserTie, FaLightbulb, FaBriefcase } from "react-icons/fa";
+import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from '../src/firebase'; // Firebase import
+import { toast } from "react-hot-toast"; // React Hot Toast import
 
 const Register = () => {
   const [step, setStep] = useState(1);
   const [userType, setUserType] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter(); // Yönlendirme için useRouter kullanıyoruz
+
+  useEffect(() => {
+    // Kullanıcı zaten giriş yaptıysa kayıt sayfasına erişimi engelle
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        router.push("/"); // Ana sayfaya yönlendir
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup
+  }, [router]);
 
   const handleSelectType = (type) => {
     setUserType(type);
@@ -15,16 +33,35 @@ const Register = () => {
     setStep(1);
   };
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Firebase Authentication ile kullanıcı kaydı
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Firestore'a kullanıcı bilgilerini kaydetme
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        userType: userType,
+      });
+
+      router.push("/"); // Ana sayfaya yönlendir
+      toast.success("Kayıt başarıyla tamamlandı!"); // Başarı toast mesajı
+
+
+    } catch (err) {
+      setError(err.message);
+      toast.error("Kayıt işlemi sırasında hata: " + err.message); // Hata toast mesajı
+      console.error("Kayıt işlemi sırasında hata:", err.message);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <motion.div
-        key={step}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -50 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md"
-      >
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
         {step === 1 && (
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-gray-900">Hesap Türünü Seç</h2>
@@ -76,6 +113,8 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Adınız ve Soyadınız"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg mt-1 focus:ring-2 focus:ring-purple-500 outline-none"
               />
             </div>
@@ -85,6 +124,8 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="E-mail adresiniz"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg mt-1 focus:ring-2 focus:ring-purple-500 outline-none"
               />
             </div>
@@ -94,16 +135,21 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="Şifreniz"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg mt-1 focus:ring-2 focus:ring-purple-500 outline-none"
               />
             </div>
 
-            <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg mt-6 transition-all">
+            <button
+              onClick={handleRegister}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg mt-6 transition-all"
+            >
               Kaydı Tamamla
             </button>
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };
