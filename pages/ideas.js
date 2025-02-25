@@ -19,21 +19,40 @@ const Ideas = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 16;
 
+  // Öne çıkan fikirleri filtrele
+  const featuredIdeas = exampleIdeas.filter(idea => idea.isFavorited);
+
   // Mevcut sayfanın fikirlerini hesapla
   const indexOfLastIdea = currentPage * itemsPerPage;
   const indexOfFirstIdea = indexOfLastIdea - itemsPerPage;
-  const currentIdeas = exampleIdeas.slice(indexOfFirstIdea, indexOfLastIdea);
+  const remainingIdeas = exampleIdeas.filter(idea => !idea.isFavorited);
+  const currentIdeas = remainingIdeas.slice(indexOfFirstIdea, indexOfLastIdea);
 
   // Sayfa değiştirme fonksiyonu
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 py-24">
+      {/* Öne Çıkan Fikirler - Filtre Barı Üstünde */}
+      <motion.div
+        className="mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-2xl font-semibold mb-4">Öne Çıkan Fikirler</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {featuredIdeas.slice(0, 4).map((idea) => (
+            <DiscoverIdeaCard key={idea.id} {...idea} />
+          ))}
+        </div>
+      </motion.div>
+
       {/* Filtreleme Barı */}
       <FiltreBar />
 
       {/* Fikir Listesi */}
-      <motion.div 
+      <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -46,7 +65,7 @@ const Ideas = () => {
 
       {/* Sayfalama Kontrolleri */}
       <div className="flex justify-center mt-8 space-x-2">
-        {[...Array(Math.ceil(exampleIdeas.length / itemsPerPage)).keys()].map((num) => (
+        {[...Array(Math.ceil(remainingIdeas.length / itemsPerPage)).keys()].map((num) => (
           <button
             key={num + 1}
             onClick={() => paginate(num + 1)}
