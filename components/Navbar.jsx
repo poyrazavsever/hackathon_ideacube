@@ -4,6 +4,7 @@ import { auth } from "../src/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -23,6 +24,17 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      toast.success("Başarıyla çıkış yapıldı.")
+      setUser(null); // Kullanıcıyı çıkardıktan sonra state'i temizle
+    } catch (error) {
+      console.error("Çıkış yapılırken hata oluştu:", error);
+      toast.error("Çıkış yapılırken bir hata oluştu.")
+    }
   };
 
   return (
@@ -58,7 +70,7 @@ const Navbar = () => {
               {user.photoURL ? (
                 <img src={user.photoURL} alt="Profile" className="w-full h-full rounded-full object-cover" />
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="w-full h-full text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="text-white">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4z"/>
                 </svg>
               )}
@@ -72,10 +84,11 @@ const Navbar = () => {
                 transition={{ duration: 0.2 }}
               >
                 <ul className="py-2">
-                  <li><Link href="/profile" className="block px-4 py-2 text-black hover:bg-gray-100">Profil</Link></li>
-                  <li><Link href="/share-education" className="block px-4 py-2 text-black hover:bg-gray-100">Eğitim Paylaş</Link></li>
-                  <li><Link href="/applications" className="block px-4 py-2 text-black hover:bg-gray-100">Başvurular</Link></li>
-                  <li><Link href="/settings" className="block px-4 py-2 text-black hover:bg-gray-100">Ayarlar</Link></li>
+                  <li><Link href="/profile" className="w-full block px-4 py-2 text-black hover:bg-gray-100 transition-all">Profil</Link></li>
+                  <li><Link href="/share-education" className="w-full block px-4 py-2 text-black hover:bg-gray-100 transition-all">Eğitim Paylaş</Link></li>
+                  <li><Link href="/applications" className="w-full block px-4 py-2 text-black hover:bg-gray-100 transition-all">Başvurular</Link></li>
+                  <li><Link href="/settings" className="w-full block px-4 py-2 text-black hover:bg-gray-100 transition-all">Ayarlar</Link></li>
+                  <li><button onClick={handleSignOut} className="w-full text-left block px-4 py-2 text-black hover:bg-red-200 transition-all">Çıkış Yap</button></li>
                 </ul>
               </motion.div>
             )}
