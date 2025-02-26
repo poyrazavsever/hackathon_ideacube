@@ -22,6 +22,29 @@ const AI = () => {
     }
   };
 
+  // Evaluation sonucunu daha düzenli bir şekilde parse etme
+  const renderEvaluation = () => {
+    if (!evaluation) return null;
+    
+    const sections = evaluation.split("\n\n"); // Değerlendirme metnini her bir bölüm için ayır
+    return sections.map((section, index) => {
+      const lines = section.split("\n"); // Her bir bölümü satırlara ayır
+      const title = lines[0]?.replace("**", "").replace("**", ""); // Başlıkları temizle
+      const score = lines[1]?.match(/(\d+\/10)/g); // Puanı bul
+      const description = lines.slice(2).join(" "); // Açıklama kısmını al
+
+      return (
+        <div key={index} className="mt-4">
+          <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
+          <p className="text-sm text-gray-500">{description}</p>
+          {score && (
+            <p className="text-sm font-bold text-gray-800">Puan: {score}</p>
+          )}
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -64,7 +87,7 @@ const AI = () => {
           {evaluation && (
             <div className="mt-6 border rounded p-4 bg-gray-50">
               <h2 className="text-lg font-semibold text-gray-700 mb-2">Değerlendirme Sonucu:</h2>
-              <pre className="text-sm text-gray-800 whitespace-pre-wrap">{evaluation}</pre>
+              {renderEvaluation()} {/* Değerlendirmeleri düzenli şekilde render et */}
             </div>
           )}
         </div>
